@@ -26,7 +26,8 @@ A VS Code extension that shows inline previews of i18n translation values in EJS
 - VS Code 1.85.0 or higher
 - i18n translation files in JSON format
 
-## Development
+## Contributing:
+- Fork this repo
 
 ```bash
 npm install
