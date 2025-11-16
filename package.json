@@ -1,0 +1,58 @@
+{
+  "name": "ejs-i18n-helper",
+  "displayName": "ejs i18n helper",
+  "description": "Preview i18n translation values inline in EJS templates. Prefill i18n function calls with values from JSON files. Supports multiple locales.Preferences i18n JSON files from a specified folder.",
+  "version": "1.0.0",
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "publisher": "hippoandco",
+  "repository": {
+    "type": "github",
+    
+  },
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "main": "./dist/extension.js",
+  "contributes": {
+    "configuration": {
+      "title": "i18n EJS Preview",
+      "properties": {
+        "i18nEjsPreview.i18nFolder": {
+          "type": "string",
+          "default": "locales",
+          "description": "Folder containing i18n JSON files (relative to workspace root)"
+        },
+        "i18nEjsPreview.defaultLocale": {
+          "type": "string",
+          "default": "en",
+          "description": "Default locale to use for previews (e.g., 'en', 'fr')"
+        },
+        "i18nEjsPreview.functionName": {
+          "type": "string",
+          "default": "__",
+          "description": "i18n function name used in templates"
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "pretest": "npm run compile",
+    "lint": "eslint src --ext ts"
+  },
+  "devDependencies": {
+    "@types/node": "^20.x",
+    "@types/vscode": "^1.85.0",
+    "@typescript-eslint/eslint-plugin": "^6.x",
+    "@typescript-eslint/parser": "^6.x",
+    "eslint": "^8.x",
+    "typescript": "^5.3.0"
+  }
+}
