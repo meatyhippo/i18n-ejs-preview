@@ -21,7 +21,7 @@ export function activate(context: vscode.ExtensionContext) {
 
     // Register hover provider
     context.subscriptions.push(
-        vscode.languages.registerHoverProvider(['ejs', 'html'], {
+        vscode.languages.registerHoverProvider(['ejs', 'html', 'js', 'ts'], {
             provideHover(document, position, token) {
                 return provideHover(document, position);
             }
@@ -30,7 +30,7 @@ export function activate(context: vscode.ExtensionContext) {
 
     // Register completion provider
     context.subscriptions.push(
-        vscode.languages.registerCompletionItemProvider(['ejs', 'html'], {
+        vscode.languages.registerCompletionItemProvider(['ejs', 'html', 'js', 'ts'], {
             provideCompletionItems(document, position) {
                 return provideCompletionItems(document, position);
             }
@@ -138,8 +138,8 @@ function extractI18nKey(line: string, position: number): string | null {
     const config = vscode.workspace.getConfiguration('i18nEjsPreview');
     const functionName = config.get<string>('functionName', '__');
     
-    // Match patterns like <%= __('key') %> or <%= __("key") %>
-    const regex = new RegExp(`<%=\\s*${functionName}\\s*\\(\\s*['"]([^'"]+)['"]\\s*\\)\\s*%>`, 'g');
+    // Match patterns like __('key') or __("key")
+    const regex = new RegExp(`${functionName}\\s*\\(\\s*['"]([^'"]+)['"]\\s*\\)`, 'g');
     
     let match;
     while ((match = regex.exec(line)) !== null) {
@@ -179,9 +179,9 @@ function provideCompletionItems(document: vscode.TextDocument, position: vscode.
     const config = vscode.workspace.getConfiguration('i18nEjsPreview');
     const functionName = config.get<string>('functionName', '__');
     
-    // Check if we're inside <%= __('...') %> or <%= __("...") %>
-    const singleQuoteMatch = textBeforeCursor.match(new RegExp(`<%=\\s*${functionName}\\s*\\(\\s*'([^']*)`));
-    const doubleQuoteMatch = textBeforeCursor.match(new RegExp(`<%=\\s*${functionName}\\s*\\(\\s*"([^"]*)`));
+    // Check if we're inside __('...') or __("...")
+    const singleQuoteMatch = textBeforeCursor.match(new RegExp(`${functionName}\\s*\\(\\s*'([^']*)`));
+    const doubleQuoteMatch = textBeforeCursor.match(new RegExp(`${functionName}\\s*\\(\\s*"([^"]*)`));
     
     const match = singleQuoteMatch || doubleQuoteMatch;
     
@@ -258,7 +258,7 @@ function updateDecorations(editor: vscode.TextEditor) {
     
     const config = vscode.workspace.getConfiguration('i18nEjsPreview');
     const functionName = config.get<string>('functionName', '__');
-    const regex = new RegExp(`<%=\\s*${functionName}\\s*\\(\\s*['"]([^'"]+)['"]\\s*\\)\\s*%>`, 'g');
+    const regex = new RegExp(`${functionName}\\s*\\(\\s*['"]([^'"]+)['"]\\s*\\)`, 'g');
     
     const decorations: vscode.DecorationOptions[] = [];
     const text = editor.document.getText();

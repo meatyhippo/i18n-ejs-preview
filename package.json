@@ -1,52 +1,33 @@
 {
-  "name": "ejs-i18n-helper",
-  "displayName": "ejs i18n helper",
-  "description": "Preview i18n translation values inline in EJS templates. Prefill i18n function calls with values from JSON files. Supports multiple locales.Preferences i18n JSON files from a specified folder.",
-  "version": "1.0.0",
-  "engines": {
-    "vscode": "^1.85.0"
-  },
-  "categories": [
-    "Other"
-  ],
-  "publisher": "hippoandco",
-  "repository": {
-    "type": "github",
-    
-  },
   "activationEvents": [
     "onStartupFinished"
   ],
-  "main": "./dist/extension.js",
+  "categories": [
+    "Other"
+  ],
   "contributes": {
     "configuration": {
-      "title": "i18n EJS Preview",
       "properties": {
-        "i18nEjsPreview.i18nFolder": {
-          "type": "string",
-          "default": "locales",
-          "description": "Folder containing i18n JSON files (relative to workspace root)"
-        },
         "i18nEjsPreview.defaultLocale": {
-          "type": "string",
           "default": "en",
-          "description": "Default locale to use for previews (e.g., 'en', 'fr')"
+          "description": "Default locale to use for previews (e.g., 'en', 'fr')",
+          "type": "string"
         },
         "i18nEjsPreview.functionName": {
-          "type": "string",
           "default": "__",
-          "description": "i18n function name used in templates"
+          "description": "i18n function name used in templates",
+          "type": "string"
+        },
+        "i18nEjsPreview.i18nFolder": {
+          "default": "locales",
+          "description": "Folder containing i18n JSON files (relative to workspace root)",
+          "type": "string"
         }
-      }
+      },
+      "title": "i18n EJS Preview"
     }
   },
-  "scripts": {
-    "vscode:prepublish": "npm run compile",
-    "compile": "tsc -p ./",
-    "watch": "tsc -watch -p ./",
-    "pretest": "npm run compile",
-    "lint": "eslint src --ext ts"
-  },
+  "description": "Preview i18n translation values inline in EJS templates. Prefill i18n function calls with values from JSON files. Supports multiple locales.Preferences i18n JSON files from a specified folder.",
   "devDependencies": {
     "@types/node": "^20.x",
     "@types/vscode": "^1.85.0",
@@ -54,5 +35,26 @@
     "@typescript-eslint/parser": "^6.x",
     "eslint": "^8.x",
     "typescript": "^5.3.0"
-  }
+  },
+  "displayName": "ejs i18n helper",
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "icon": "icon.jpeg",
+  "license": "MIT",
+  "main": "./dist/extension.js",
+  "name": "ejs-i18n-helper",
+  "publisher": "hippoandco",
+  "repository": {
+    "type": "github",
+    "url": "https://github.com/meatyhippo/i18n-ejs-preview"
+  },
+  "scripts": {
+    "compile": "tsc -p ./",
+    "lint": "eslint src --ext ts",
+    "pretest": "npm run compile",
+    "vscode:prepublish": "npm run compile",
+    "watch": "tsc -watch -p ./"
+  },
+  "version": "1.0.2"
 }
